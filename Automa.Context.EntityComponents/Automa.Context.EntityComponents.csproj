@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyVersion>1.0.8.18306</AssemblyVersion>
+    <FileVersion>1.0.8.18306</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Automa.Context\Automa.Context.csproj" />
+    <ProjectReference Include="..\Automa.EntityComponents\Automa.EntityComponents.csproj" />
+  </ItemGroup>
+
+</Project>

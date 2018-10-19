@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyVersion>1.0.2.18306</AssemblyVersion>
+    <FileVersion>1.0.2.18306</FileVersion>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Include="..\Automa.Behaviours\BehaviourGroup.cs" Link="BehaviourGroup.cs" />
+    <Compile Include="..\Automa.Behaviours\IBehaviour.cs" Link="IBehaviour.cs" />
+    <Compile Include="..\Automa.Behaviours\IBehaviourGroup.cs" Link="IBehaviourGroup.cs" />
+    <Compile Include="..\Automa.Common\ArrayList.cs" Link="ArrayList.cs" />
+    <Compile Include="..\Automa.Common\ReadonlyArray.cs" Link="ReadonlyArray.cs" />
+    <Compile Include="..\Automa.Common\TypeOf.cs" Link="TypeOf.cs" />
+    <Compile Include="..\Automa.Context.Behaviours\BehavioursService.cs" Link="BehavioursService.cs" />
+    <Compile Include="..\Automa.Context.Behaviours\ContextBehaviourGroup.cs" Link="ContextBehaviourGroup.cs" />
+    <Compile Include="..\Automa.Context.Behaviours\IContextBehaviour.cs" Link="IContextBehaviour.cs" />
+    <Compile Include="..\Automa.Context.Entities\EntityService.cs" Link="EntityService.cs" />
+    <Compile Include="..\Automa.Context\Context.cs" Link="Context.cs" />
+    <Compile Include="..\Automa.Context\ContextException.cs" Link="ContextException.cs" />
+    <Compile Include="..\Automa.Context\IContext.cs" Link="IContext.cs" />
+    <Compile Include="..\Automa.Context\IService.cs" Link="IService.cs" />
+    <Compile Include="..\Automa.EntityComponents.Behaviours\EntityComponentBehaviour.cs" Link="EntityComponentBehaviour.cs" />
+    <Compile Include="..\Automa.EntityComponents.Behaviours\EntityEnumeratorBehaviour.cs" Link="EntityEnumeratorBehaviour.cs" />
+    <Compile Include="..\Automa.EntityComponents.Behaviours\EntityGroupBehaviour.cs" Link="EntityGroupBehaviour.cs" />
+    <Compile Include="..\Automa.EntityComponents\ComponentType.cs" Link="ComponentType.cs" />
+    <Compile Include="..\Automa.EntityComponents\EntitiesException.cs" Link="EntitiesException.cs" />
+    <Compile Include="..\Automa.EntityComponents\Entity.cs" Link="Entity.cs" />
+    <Compile Include="..\Automa.EntityComponents\EntityManager.cs" Link="EntityManager.cs" />
+    <Compile Include="..\Automa.EntityComponents\EntityManager.Enumerators.cs" Link="EntityManager.Enumerators.cs" />
+    <Compile Include="..\Automa.EntityComponents\EntityManager.Groups.cs" Link="EntityManager.Groups.cs" />
+    <Compile Include="..\Automa.EntityComponents\EntityType.cs" Link="EntityType.cs" />
+    <Compile Include="..\Automa.EntityComponents\ExcludeComponentAttribute.cs" Link="ExcludeComponentAttribute.cs" />
+    <Compile Include="..\Automa.EntityComponents\IArray.cs" Link="IArray.cs" />
+    <Compile Include="..\Automa.EntityComponents\IEntityAddedListener.cs" Link="IEntityAddedListener.cs" />
+    <Compile Include="..\Automa.EntityComponents\IEntityRemovingListener.cs" Link="IEntityRemovingListener.cs" />
+    <Compile Include="..\Automa.EntityComponents\IGroup.cs" Link="IGroup.cs" />
+    <Compile Include="..\Automa.EntityComponents\Internal\ComponentArray.cs" Link="ComponentArray.cs" />
+    <Compile Include="..\Automa.EntityComponents\Internal\ComponentData.cs" Link="ComponentData.cs" />
+    <Compile Include="..\Automa.EntityComponents\Internal\EntityEnumerator.cs" Link="EntityEnumerator.cs" />
+    <Compile Include="..\Automa.EntityComponents\Internal\EntityTypeChunk.cs" Link="EntityTypeChunk.cs" />
+    <Compile Include="..\Automa.EntityComponents\Internal\Group.cs" Link="Group.cs" />
+    <Compile Include="..\Automa.EntityComponents\Internal\HashUtility.cs" Link="HashUtility.cs" />
+    <Compile Include="..\Automa.EntityComponents\Internal\IComponentValue.cs" Link="IComponentValue.cs" />
+  </ItemGroup>
+
+</Project>

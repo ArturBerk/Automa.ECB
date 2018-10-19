@@ -1,0 +1,84 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2041
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.Entities", "Automa.Entities\Automa.Entities.csproj", "{1A9B1719-9A61-42C9-BB4C-D5190378064A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.Behaviours", "Automa.Behaviours\Automa.Behaviours.csproj", "{FB81C432-313C-4FB4-B2D0-E668B7B10721}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.EntityComponents", "Automa.EntityComponents\Automa.EntityComponents.csproj", "{1D1FE288-5B42-4411-ACFD-188B7239A6B0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.EntityComponents.Behaviours", "Automa.EntityComponents.Behaviours\Automa.EntityComponents.Behaviours.csproj", "{941667E2-3EB9-4CA9-B115-425CEE2B941C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.Context", "Automa.Context\Automa.Context.csproj", "{81476DD2-EB64-44B9-97C9-69FE5466CA9C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.Context.Behaviours", "Automa.Context.Behaviours\Automa.Context.Behaviours.csproj", "{9B0C2863-1610-4BCB-8CA3-C6152D3E4C32}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.Context.EntityComponents", "Automa.Context.EntityComponents\Automa.Context.EntityComponents.csproj", "{9050DCA2-E962-45AE-B441-448EA816C02D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.Context.Entities", "Automa.Context.Entities\Automa.Context.Entities.csproj", "{560A6D8C-0665-44BF-9BA0-44CDF2E778F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F6E86985-AE1A-46D1-8094-9EE12392AD03}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.EntityComponents.Tests", "Tests\Automa.EntityComponents.Tests\Automa.EntityComponents.Tests.csproj", "{E050114D-E78C-4CD3-8406-399578EB41CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.ECB", "Automa.ECB\Automa.ECB.csproj", "{47148AB8-BC27-435C-B1D0-6164BBD36FD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1A9B1719-9A61-42C9-BB4C-D5190378064A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A9B1719-9A61-42C9-BB4C-D5190378064A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A9B1719-9A61-42C9-BB4C-D5190378064A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A9B1719-9A61-42C9-BB4C-D5190378064A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB81C432-313C-4FB4-B2D0-E668B7B10721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB81C432-313C-4FB4-B2D0-E668B7B10721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB81C432-313C-4FB4-B2D0-E668B7B10721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB81C432-313C-4FB4-B2D0-E668B7B10721}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D1FE288-5B42-4411-ACFD-188B7239A6B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D1FE288-5B42-4411-ACFD-188B7239A6B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D1FE288-5B42-4411-ACFD-188B7239A6B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D1FE288-5B42-4411-ACFD-188B7239A6B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{941667E2-3EB9-4CA9-B115-425CEE2B941C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{941667E2-3EB9-4CA9-B115-425CEE2B941C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{941667E2-3EB9-4CA9-B115-425CEE2B941C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{941667E2-3EB9-4CA9-B115-425CEE2B941C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81476DD2-EB64-44B9-97C9-69FE5466CA9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81476DD2-EB64-44B9-97C9-69FE5466CA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81476DD2-EB64-44B9-97C9-69FE5466CA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81476DD2-EB64-44B9-97C9-69FE5466CA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B0C2863-1610-4BCB-8CA3-C6152D3E4C32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B0C2863-1610-4BCB-8CA3-C6152D3E4C32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B0C2863-1610-4BCB-8CA3-C6152D3E4C32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B0C2863-1610-4BCB-8CA3-C6152D3E4C32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9050DCA2-E962-45AE-B441-448EA816C02D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9050DCA2-E962-45AE-B441-448EA816C02D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9050DCA2-E962-45AE-B441-448EA816C02D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9050DCA2-E962-45AE-B441-448EA816C02D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{560A6D8C-0665-44BF-9BA0-44CDF2E778F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{560A6D8C-0665-44BF-9BA0-44CDF2E778F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{560A6D8C-0665-44BF-9BA0-44CDF2E778F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{560A6D8C-0665-44BF-9BA0-44CDF2E778F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E050114D-E78C-4CD3-8406-399578EB41CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E050114D-E78C-4CD3-8406-399578EB41CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E050114D-E78C-4CD3-8406-399578EB41CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E050114D-E78C-4CD3-8406-399578EB41CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47148AB8-BC27-435C-B1D0-6164BBD36FD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47148AB8-BC27-435C-B1D0-6164BBD36FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47148AB8-BC27-435C-B1D0-6164BBD36FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47148AB8-BC27-435C-B1D0-6164BBD36FD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E050114D-E78C-4CD3-8406-399578EB41CD} = {F6E86985-AE1A-46D1-8094-9EE12392AD03}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {57BCE530-DA4F-436D-AA16-EDFB799CF56E}
+	EndGlobalSection
+EndGlobal

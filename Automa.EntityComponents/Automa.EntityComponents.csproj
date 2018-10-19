@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyVersion>1.0.50.18306</AssemblyVersion>
+    <FileVersion>1.0.50.18306</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Automa.Common\ArrayList.cs" Link="Common\ArrayList.cs" />
+    <Compile Include="..\Automa.Common\ReadonlyArray.cs" Link="Common\ReadonlyArray.cs" />
+    <Compile Include="..\Automa.Common\TypeOf.cs" Link="Common\TypeOf.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
+
+</Project>
