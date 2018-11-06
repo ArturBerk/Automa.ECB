@@ -24,7 +24,7 @@ namespace Automa.EntityComponents
                     }
                     BindGroup((IGroup) value);
                 }
-                else if (typeof(EntityEnumerator).IsAssignableFrom(fieldType))
+                else if (typeof(EntityIterator).IsAssignableFrom(fieldType))
                 {
                     var value = fieldInfo.GetValue(groupHolder);
                     if (value == null)
@@ -32,7 +32,7 @@ namespace Automa.EntityComponents
                         value = Activator.CreateInstance(fieldType);
                         fieldInfo.SetValue(groupHolder, value);
                     }
-                    BindEnumerator((EntityEnumerator) value);
+                    BindEnumerator((EntityIterator) value);
                 }
             }
         }
@@ -51,12 +51,12 @@ namespace Automa.EntityComponents
                         UnbindGroup((IGroup) value);
                     }
                 }
-                else if (typeof(EntityEnumerator).IsAssignableFrom(fieldType))
+                else if (typeof(EntityIterator).IsAssignableFrom(fieldType))
                 {
                     var value = fieldInfo.GetValue(groupHolder);
                     if (value == null)
                     {
-                        UnbindEnumerator((EntityEnumerator) value);
+                        UnbindEnumerator((EntityIterator) value);
                     }
                 }
             }

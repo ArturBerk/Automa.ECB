@@ -1,4 +1,5 @@
 ﻿using System;
+using Automa.Common;
 
 namespace Automa.EntityComponents.Internal
 {
@@ -12,6 +13,7 @@ namespace Automa.EntityComponents.Internal
         public int EntityCount;
         public event Action<EntityTypeChunk, Entity> EntityAdded;
         public event Action<EntityTypeChunk, Entity> EntityRemoving;
+        private ArrayList<(EntityTypeChunk, Entity)> addedEntities = new ArrayList<(EntityTypeChunk, Entity)>(4);
 
         public EntityTypeChunk(EntityManager entityManager, EntityType entityType)
         {
@@ -40,6 +42,10 @@ namespace Automa.EntityComponents.Internal
             EntityData.Add();
             EntityData.Set(EntityCount, ref entity);
             entity.IndexInChunk = EntityCount++;
+            if (EntityAdded != null)
+            {
+                addedEntities.Add((movedFrom, entity));
+            }
             EntityAdded?.Invoke(movedFrom, entity);
             return entity;
         }
@@ -59,6 +65,19 @@ namespace Automa.EntityComponents.Internal
             entity.Chunk = null;
             entity.IndexInChunk = -1;
             --EntityCount;
+        }
+
+        public void Dispatch()
+        {
+            if (EntityAdded != null && addedEntities.Count > 0)
+            {
+                for (var index = 0; index < addedEntities.Buffer.Length; index++)
+                {
+                    var addedEntity = addedEntities.Buffer[index];
+                    EntityAdded(addedEntity.Item1, addedEntity.Item2);
+                }
+                addedEntities.Clear();
+            }
         }
     }
 }

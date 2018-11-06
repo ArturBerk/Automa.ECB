@@ -1,8 +1,8 @@
-﻿using Automa.EntityComponents;
+﻿using Automa.Entities;
 
 namespace Automa.Context.Entities
 {
-    public class EntityService : EntityManager, IService
+    public class EntityService : EntityGroup, IService
     {
         public virtual void OnAttach(IContext context)
         {

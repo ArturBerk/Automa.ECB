@@ -16,11 +16,23 @@ namespace Automa.EntityComponents
             TypeId = typeId;
             TypeIndex = typeIndex;
         }
+
+        public static EntityType FromComponentTypes(params ComponentType[] types)
+        {
+            ComponentTypeManager.Normalize(types);
+            var typeId = HashUtility.Fletcher32(types, types.Length);
+            if (!EntityTypeManager.typesById.TryGetValue(typeId, out var type))
+            {
+                type = new EntityType(types, typeId, EntityTypeManager.typesById.Count);
+                EntityTypeManager.typesById.Add(typeId, type);
+            }
+            return type;
+        }
     }
 
     public static class EntityTypeManager
     {
-        private static readonly Dictionary<uint, EntityType> typesById = new Dictionary<uint, EntityType>();
+        internal static readonly Dictionary<uint, EntityType> typesById = new Dictionary<uint, EntityType>();
 
         public static EntityType FromComponentTypes(params ComponentType[] types)
         {

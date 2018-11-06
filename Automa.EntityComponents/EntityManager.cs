@@ -47,5 +47,14 @@ namespace Automa.EntityComponents
         {
             Array.Resize(ref chunks, count);
         }
+
+        public void Dispatch()
+        {
+            for (var index = 0; index < chunks.Length; index++)
+            {
+                var entityTypeChunk = chunks[index];
+                entityTypeChunk.Dispatch();
+            }
+        }
     }
 }

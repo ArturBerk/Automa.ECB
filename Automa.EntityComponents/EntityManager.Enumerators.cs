@@ -8,18 +8,18 @@ namespace Automa.EntityComponents
 {
     public partial class EntityManager
     {
-        public void BindEnumerator(EntityEnumerator entityEnumerator)
+        public void BindEnumerator(EntityIterator entityIterator)
         {
             var includedTypesTmp = new List<ComponentType>();
             var excludedTypesTmp = new List<ComponentType>();
-            foreach (var fieldInfo in entityEnumerator.GetType()
+            foreach (var fieldInfo in entityIterator.GetType()
                 .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
                 var fieldType = fieldInfo.FieldType;
                 if (fieldType.IsGenericType)
                 {
                     var genericType = fieldType.GetGenericTypeDefinition();
-                    if (genericType == typeof(IComponentValue<>))
+                    if (genericType == typeof(IValue<>))
                     {
                         var componentType = ComponentType.Create(fieldType.GetGenericArguments()[0]);
                         includedTypesTmp.Add(componentType);
@@ -33,69 +33,49 @@ namespace Automa.EntityComponents
             }
 
             var internalGroup = GetGroup(includedTypesTmp.ToArray(), excludedTypesTmp.ToArray());
-            BindEnumerator(entityEnumerator, internalGroup);
+            BindEnumerator(entityIterator, internalGroup);
         }
 
-        public void UnbindEnumerator(EntityEnumerator entityEnumerator)
+        public void UnbindEnumerator(EntityIterator entityIterator)
         {
-            UnbindEnumerator(entityEnumerator, entityEnumerator.group);
+            UnbindEnumerator(entityIterator, entityIterator.group);
         }
 
-        private void UnbindEnumerator(EntityEnumerator entityEnumerator, Group group)
+        private void UnbindEnumerator(EntityIterator entityIterator, Group group)
         {
             if (group == null) return;
-            entityEnumerator.group = null;
-            foreach (var fieldInfo in entityEnumerator.GetType()
+            entityIterator.group = null;
+            foreach (var fieldInfo in entityIterator.GetType()
                 .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
             {
                 var fieldType = fieldInfo.FieldType;
                 if (fieldType.IsGenericType)
                 {
                     var genericType = fieldType.GetGenericTypeDefinition();
-                    if (genericType == typeof(IComponentValue<>))
+                    if (genericType == typeof(IValue<>))
                     {
-                        fieldInfo.SetValue(entityEnumerator, null);
+                        fieldInfo.SetValue(entityIterator, null);
                     }
                 }
             }
-            if (entityEnumerator is IEntityAddedListener addedListener)
+            if (entityIterator is IEntityAddedListener addedListener)
             {
                 group.Remove(addedListener);
             }
-            if (entityEnumerator is IEntityRemovingListener removingListener)
+            if (entityIterator is IEntityRemovingListener removingListener)
             {
                 group.Remove(removingListener);
             }
         }
 
-        private void BindEnumerator(EntityEnumerator entityEnumerator, Group internalGroup)
+        private void BindEnumerator(EntityIterator entityIterator, Group internalGroup)
         {
-            entityEnumerator.ApplyGroup(internalGroup);
-            foreach (var fieldInfo in entityEnumerator.GetType()
-                .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
-            {
-                var fieldType = fieldInfo.FieldType;
-                if (fieldType.IsGenericType)
-                {
-                    var genericType = fieldType.GetGenericTypeDefinition();
-                    if (genericType == typeof(IComponentValue<>))
-                    {
-                        var cType = fieldType.GetGenericArguments()[0];
-                        var componentType = ComponentType.Create(cType);
-                        var componentValue =
-                            (ComponentValue) Activator.CreateInstance(typeof(ComponentValue<>).MakeGenericType(cType));
-                        componentValue.enumerator = entityEnumerator;
-                        componentValue.SetArray(internalGroup.Arrays.First(iterator =>
-                            iterator.TypeIndex == componentType.TypeIndex));
-                        fieldInfo.SetValue(entityEnumerator, componentValue);
-                    }
-                }
-            }
-            if (entityEnumerator is IEntityAddedListener addedListener)
+            entityIterator.ApplyGroup(internalGroup);
+            if (entityIterator is IEntityAddedListener addedListener)
             {
                 internalGroup.Add(addedListener);
             }
-            if (entityEnumerator is IEntityRemovingListener removingListener)
+            if (entityIterator is IEntityRemovingListener removingListener)
             {
                 internalGroup.Add(removingListener);
             }

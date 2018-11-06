@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Automa.Behaviours\BehaviourGroup.cs" Link="Behaviours\BehaviourGroup.cs" />
+    <Compile Include="..\Automa.Behaviours\IBehaviour.cs" Link="Behaviours\IBehaviour.cs" />
+    <Compile Include="..\Automa.Behaviours\IBehaviourGroup.cs" Link="Behaviours\IBehaviourGroup.cs" />
+    <Compile Include="..\Automa.Common\ArrayList.cs" Link="Common\ArrayList.cs" />
+    <Compile Include="..\Automa.Common\ReadonlyArray.cs" Link="Common\ReadonlyArray.cs" />
+    <Compile Include="..\Automa.Common\TypeOf.cs" Link="Common\TypeOf.cs" />
+    <Compile Include="..\Automa.Context.Behaviours\BehavioursService.cs" Link="Context.Behaviours\BehavioursService.cs" />
+    <Compile Include="..\Automa.Context.Behaviours\ContextBehaviourGroup.cs" Link="Context.Behaviours\ContextBehaviourGroup.cs" />
+    <Compile Include="..\Automa.Context.Behaviours\IContextBehaviour.cs" Link="Context.Behaviours\IContextBehaviour.cs" />
+    <Compile Include="..\Automa.Context.Entities\EntityService.cs" Link="Context.Entities\EntityService.cs" />
+    <Compile Include="..\Automa.Context\Context.cs" Link="Context\Context.cs" />
+    <Compile Include="..\Automa.Context\ContextException.cs" Link="Context\ContextException.cs" />
+    <Compile Include="..\Automa.Context\IContext.cs" Link="Context\IContext.cs" />
+    <Compile Include="..\Automa.Context\IService.cs" Link="Context\IService.cs" />
+    <Compile Include="..\Automa.Context\IUpdateService.cs" Link="Context\IUpdateService.cs" />
+    <Compile Include="..\Automa.Entities\EntitiesException.cs" Link="Entities\EntitiesException.cs" />
+    <Compile Include="..\Automa.Entities\EntityGroup.cs" Link="Entities\EntityGroup.cs" />
+    <Compile Include="..\Automa.Entities\IEntity.cs" Link="Entities\IEntity.cs" />
+    <Compile Include="..\Automa.Entities\IEntityCollection.cs" Link="Entities\IEntityCollection.cs" />
+    <Compile Include="..\Automa.Entities\IEntityDataCollection.cs" Link="Entities\IEntityDataCollection.cs" />
+    <Compile Include="..\Automa.Entities\IEntityGroup.cs" Link="Entities\IEntityGroup.cs" />
+    <Compile Include="..\Automa.Entities\IEntityReference.cs" Link="Entities\IEntityReference.cs" />
+    <Compile Include="..\Automa.Entities\Internal\EntityCollection.cs" Link="Entities\Internal\EntityCollection.cs" />
+    <Compile Include="..\Automa.Entities\Internal\EntityDataCollection.cs" Link="Entities\Internal\EntityDataCollection.cs" />
+    <Compile Include="..\Automa.Entities\Internal\EntityType.cs" Link="Entities\Internal\EntityType.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Behaviours\" />
+    <Folder Include="Common\" />
+    <Folder Include="Context\" />
+    <Folder Include="Context.Entities\" />
+    <Folder Include="Context.Behaviours\" />
+    <Folder Include="Entities\Internal\" />
+  </ItemGroup>
+
+</Project>

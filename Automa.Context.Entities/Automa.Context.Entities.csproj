@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Automa.Context\Automa.Context.csproj" />
+    <ProjectReference Include="..\Automa.Entities\Automa.Entities.csproj" />
   </ItemGroup>
 
 </Project>

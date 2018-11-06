@@ -3,19 +3,19 @@ using Automa.EntityComponents.Internal;
 
 namespace Automa.EntityComponents.Behaviours
 {
-    public abstract class EntityEnumeratorBehaviour<TEntityEnumerator> : EntityComponentBehaviour 
-        where TEntityEnumerator : EntityEnumerator, new()
+    public abstract class EntityIteratorBehaviour<TEntityIterator> : EntityComponentBehaviour 
+        where TEntityIterator : EntityIterator, new()
     {
-        private readonly TEntityEnumerator entityEnumerator;
+        private readonly TEntityIterator entityEnumerator;
 
-        protected EntityEnumeratorBehaviour()
+        protected EntityIteratorBehaviour()
         {
-            entityEnumerator = CreateEnumerator();
+            entityEnumerator = CreateIterator();
         }
 
-        protected virtual TEntityEnumerator CreateEnumerator()
+        protected virtual TEntityIterator CreateIterator()
         {
-            return new TEntityEnumerator();
+            return new TEntityIterator();
         }
 
         public override void OnAttach(IContext context)
@@ -30,6 +30,6 @@ namespace Automa.EntityComponents.Behaviours
             ApplyToEntities(entityEnumerator);
         }
 
-        protected abstract void ApplyToEntities(TEntityEnumerator entity);
+        protected abstract void ApplyToEntities(TEntityIterator entity);
     }
 }

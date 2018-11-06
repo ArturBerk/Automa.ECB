@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Automa.Common;
 
-namespace Automa.Entities
+namespace Automa.Entities.Internal
 {
-    public struct EntityType
+    internal struct EntityType
     {
         public bool Equals(EntityType other)
         {

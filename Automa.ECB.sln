@@ -25,6 +25,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.EntityComponents.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.ECB", "Automa.ECB\Automa.ECB.csproj", "{47148AB8-BC27-435C-B1D0-6164BBD36FD4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.ECB.Tests", "Tests\Automa.ECB.Tests\Automa.ECB.Tests.csproj", "{2B4B760F-6F1D-4340-AFE9-1B9691F11E09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automa.EB", "Automa.EB\Automa.EB.csproj", "{58A286B1-DADC-460F-9418-F76E811F9FE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,12 +75,21 @@ Global
 		{47148AB8-BC27-435C-B1D0-6164BBD36FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47148AB8-BC27-435C-B1D0-6164BBD36FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47148AB8-BC27-435C-B1D0-6164BBD36FD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B4B760F-6F1D-4340-AFE9-1B9691F11E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B4B760F-6F1D-4340-AFE9-1B9691F11E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B4B760F-6F1D-4340-AFE9-1B9691F11E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B4B760F-6F1D-4340-AFE9-1B9691F11E09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58A286B1-DADC-460F-9418-F76E811F9FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58A286B1-DADC-460F-9418-F76E811F9FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58A286B1-DADC-460F-9418-F76E811F9FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58A286B1-DADC-460F-9418-F76E811F9FE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E050114D-E78C-4CD3-8406-399578EB41CD} = {F6E86985-AE1A-46D1-8094-9EE12392AD03}
+		{2B4B760F-6F1D-4340-AFE9-1B9691F11E09} = {F6E86985-AE1A-46D1-8094-9EE12392AD03}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57BCE530-DA4F-436D-AA16-EDFB799CF56E}

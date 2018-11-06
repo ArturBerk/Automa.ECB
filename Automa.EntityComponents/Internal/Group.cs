@@ -60,9 +60,9 @@ namespace Automa.EntityComponents.Internal
             }
         }
 
-        public EntityEnumerator GetEnumerator()
+        public EntityIterator GetEnumerator()
         {
-            var entityEnumerator = new EntityEnumerator();
+            var entityEnumerator = new EntityIterator();
             entityEnumerator.ApplyGroup(this);
             return entityEnumerator;
         }
@@ -87,7 +87,7 @@ namespace Automa.EntityComponents.Internal
             for (var i = 0; i < chunks.Length; i++)
             {
                 var chunk = chunks[i];
-                if (IsSuitable(chunk))
+                if (chunk != null && IsSuitable(chunk))
                 {
                     Chunks.Add(chunk);
                 }

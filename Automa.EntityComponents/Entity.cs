@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Automa.EntityComponents.Internal;
 
 namespace Automa.EntityComponents
@@ -12,14 +13,15 @@ namespace Automa.EntityComponents
             Chunk.RemoveEntity(this, null);
         }
 
-        public void ChangeType(EntityType newType)
+        public void SetType(EntityType newType)
         {
+            if (Chunk.EntityType == newType) return;
             Chunk.entityManager.ChangeEntityType(this, newType);
         }
 
         public bool HasNotNullComponent<T>() where T : class
         {
-            var chunkComponentData = Chunk.ComponentDatas[ComponentType.Create<T>().TypeIndex];
+            var chunkComponentData = Chunk.ComponentDatas[ComponentTypeManager.GetTypeIndex<T>()];
             return ((ComponentData<T>) chunkComponentData)?[IndexInChunk] != null;
         }
 
@@ -28,9 +30,9 @@ namespace Automa.EntityComponents
             return Chunk.ComponentDatas[ComponentType.Create<T>().TypeIndex] != null;
         }
 
-        public void SetComponent<T>(T data) where T : class
+        public void SetComponent<T>(T data)
         {
-            var t = (ComponentData<T>)Chunk.ComponentDatas[ComponentType.Create<T>().TypeIndex];
+            var t = (ComponentData<T>)Chunk.ComponentDatas[ComponentTypeManager.GetTypeIndex<T>()];
             if (t == null)
             {
                 throw new EntitiesException($"Entity doesn't have component of type \"{typeof(T)}\"");
@@ -38,9 +40,9 @@ namespace Automa.EntityComponents
             t[IndexInChunk] = data;
         }
 
-        public void SetComponent<T>(ref T data) where T : struct
+        public void SetComponent<T>(ref T data)
         {
-            var t = (ComponentData<T>)Chunk.ComponentDatas[ComponentType.Create<T>().TypeIndex];
+            var t = (ComponentData<T>)Chunk.ComponentDatas[ComponentTypeManager.GetTypeIndex<T>()];
             if (t == null)
             {
                 throw new EntitiesException($"Entity doesn't have component of type \"{typeof(T)}\"");
@@ -48,9 +50,10 @@ namespace Automa.EntityComponents
             t[IndexInChunk] = data;
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public ref T GetComponent<T>()
         {
-            var t = (ComponentData<T>)Chunk.ComponentDatas[ComponentType.Create<T>().TypeIndex];
+            var t = (ComponentData<T>)Chunk.ComponentDatas[ComponentTypeManager.GetTypeIndex<T>()];
             if (t == null)
             {
                 throw new EntitiesException($"Entity doesn't have component of type \"{typeof(T)}\"");

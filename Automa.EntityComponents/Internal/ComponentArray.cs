@@ -32,7 +32,7 @@ namespace Automa.EntityComponents.Internal
             index = ComponentType.Create<T>().TypeIndex;
         }
 
-        public ref T Get(EntityEnumerator f)
+        public ref T Get(EntityIterator f)
         {
             return ref componentDatas[f.CurrentChunkIndex][f.CurrentIndex];
         }

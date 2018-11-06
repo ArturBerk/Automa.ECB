@@ -1,26 +1,36 @@
-﻿namespace Automa.EntityComponents.Internal
+﻿using System.Runtime.CompilerServices;
+
+namespace Automa.EntityComponents.Internal
 {
-    public interface IComponentValue<T>
+    public interface IValue<T>
     {
         ref T Value { get; }
     }
 
-    internal abstract class ComponentValue
+    internal abstract class Value
     {
-        internal EntityEnumerator enumerator;
-
-        public abstract void SetArray(IComponentArray data);
+        public EntityIterator Iterator;
+        public abstract void ChangeChunk(EntityTypeChunk chunk);
     }
 
-    internal class ComponentValue<T> : ComponentValue, IComponentValue<T>
+    internal class Value<T> : Value, IValue<T>
     {
-        internal ComponentArray<T> array;
-
-        public ref T Value => ref array.Get(enumerator);
-
-        public override void SetArray(IComponentArray data)
+        private readonly int componentTypeIndex;
+        private ComponentData<T> data;
+        ref T IValue<T>.Value
         {
-            array = (ComponentArray<T>) data;
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            get { return ref data[Iterator.CurrentIndex]; }
+        }
+
+        public Value()
+        {
+            componentTypeIndex = ComponentTypeManager.GetTypeIndex<T>();
+        }
+
+        public override void ChangeChunk(EntityTypeChunk chunk)
+        {
+            data = (ComponentData<T>) chunk?.ComponentDatas[componentTypeIndex];
         }
     }
 }

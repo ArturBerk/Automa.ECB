@@ -4,7 +4,7 @@ using Automa.Entities.Internal;
 
 namespace Automa.Common
 {
-    internal struct ReadOnlyArray<T> : IEnumerable<T>
+    public struct ReadOnlyArray<T> : IEnumerable<T>
     {
         private readonly T[] buffer;
         public readonly int Count;
