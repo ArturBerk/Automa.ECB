@@ -7,6 +7,13 @@
   </PropertyGroup>
   
   <ItemGroup>
+    <Compile Include="..\Automa.Behaviours.Async\BehaviourTree.cs" Link="Behaviours.Async\BehaviourTree.cs" />
+    <Compile Include="..\Automa.Behaviours.Async\BehaviourTreeBuilder.cs" Link="Behaviours.Async\BehaviourTreeBuilder.cs" />
+    <Compile Include="..\Automa.Behaviours.Async\Dependency.cs" Link="Behaviours.Async\Dependency.cs" />
+    <Compile Include="..\Automa.Behaviours.Async\DependencyMode.cs" Link="Behaviours.Async\DependencyMode.cs" />
+    <Compile Include="..\Automa.Behaviours.Async\IAsyncBehaviour.cs" Link="Behaviours.Async\IAsyncBehaviour.cs" />
+    <Compile Include="..\Automa.Behaviours.Async\IDependency.cs" Link="Behaviours.Async\IDependency.cs" />
+    <Compile Include="..\Automa.Behaviours.Async\IMainThreadBehaviour.cs" Link="Behaviours.Async\IMainThreadBehaviour.cs" />
     <Compile Include="..\Automa.Behaviours\BehaviourGroup.cs" Link="Behaviours\BehaviourGroup.cs" />
     <Compile Include="..\Automa.Behaviours\IBehaviour.cs" Link="Behaviours\IBehaviour.cs" />
     <Compile Include="..\Automa.Behaviours\IBehaviourGroup.cs" Link="Behaviours\IBehaviourGroup.cs" />
@@ -17,6 +24,7 @@
     <Compile Include="..\Automa.Context.Behaviours\ContextBehaviourGroup.cs" Link="Context.Behaviours\ContextBehaviourGroup.cs" />
     <Compile Include="..\Automa.Context.Behaviours\IContextBehaviour.cs" Link="Context.Behaviours\IContextBehaviour.cs" />
     <Compile Include="..\Automa.Context.EntityComponents\EntityService.cs" Link="Context.EntityComponents\EntityService.cs" />
+    <Compile Include="..\Automa.Context.Tasks\TasksService.cs" Link="Context.Tasks\TasksService.cs" />
     <Compile Include="..\Automa.Context\Context.cs" Link="Context\Context.cs" />
     <Compile Include="..\Automa.Context\ContextException.cs" Link="Context\ContextException.cs" />
     <Compile Include="..\Automa.Context\IContext.cs" Link="Context\IContext.cs" />
@@ -28,6 +36,7 @@
     <Compile Include="..\Automa.EntityComponents\ComponentType.cs" Link="EntityComponents\ComponentType.cs" />
     <Compile Include="..\Automa.EntityComponents\EntitiesException.cs" Link="EntityComponents\EntitiesException.cs" />
     <Compile Include="..\Automa.EntityComponents\Entity.cs" Link="EntityComponents\Entity.cs" />
+    <Compile Include="..\Automa.EntityComponents\EntityIterator.cs" Link="EntityComponents\EntityIterator.cs" />
     <Compile Include="..\Automa.EntityComponents\EntityManager.cs" Link="EntityComponents\EntityManager.cs" />
     <Compile Include="..\Automa.EntityComponents\EntityManager.Enumerators.cs" Link="EntityComponents\EntityManager.Enumerators.cs" />
     <Compile Include="..\Automa.EntityComponents\EntityManager.Groups.cs" Link="EntityComponents\EntityManager.Groups.cs" />
@@ -39,21 +48,27 @@
     <Compile Include="..\Automa.EntityComponents\IGroup.cs" Link="EntityComponents\IGroup.cs" />
     <Compile Include="..\Automa.EntityComponents\Internal\ComponentArray.cs" Link="EntityComponents\ComponentArray.cs" />
     <Compile Include="..\Automa.EntityComponents\Internal\ComponentData.cs" Link="EntityComponents\ComponentData.cs" />
-    <Compile Include="..\Automa.EntityComponents\Internal\EntityEnumerator.cs" Link="EntityComponents\EntityEnumerator.cs" />
     <Compile Include="..\Automa.EntityComponents\Internal\EntityTypeChunk.cs" Link="EntityComponents\EntityTypeChunk.cs" />
     <Compile Include="..\Automa.EntityComponents\Internal\Group.cs" Link="EntityComponents\Group.cs" />
     <Compile Include="..\Automa.EntityComponents\Internal\HashUtility.cs" Link="EntityComponents\HashUtility.cs" />
-    <Compile Include="..\Automa.EntityComponents\Internal\IComponentValue.cs" Link="EntityComponents\IComponentValue.cs" />
+    <Compile Include="..\Automa.EntityComponents\IValue.cs" Link="EntityComponents\IValue.cs" />
+    <Compile Include="..\Automa.Tasks\BlockingQueue.cs" Link="Tasks\BlockingQueue.cs" />
+    <Compile Include="..\Automa.Tasks\BlockingQueueSlim.cs" Link="Tasks\BlockingQueueSlim.cs" />
+    <Compile Include="..\Automa.Tasks\ITask.cs" Link="Tasks\ITask.cs" />
+    <Compile Include="..\Automa.Tasks\Properties.cs" Link="Tasks\Properties.cs" />
+    <Compile Include="..\Automa.Tasks\TaskManager.cs" Link="Tasks\TaskManager.cs" />
   </ItemGroup>
   
   <ItemGroup>
     <Folder Include="Common\" />
     <Folder Include="Behaviours\" />
     <Folder Include="Context.EntityComponents\" />
+    <Folder Include="Context.Tasks\" />
     <Folder Include="Context\" />
     <Folder Include="Context.Behaviours\" />
-    <Folder Include="EntityComponents\" />
     <Folder Include="EntityComponents.Behaviours\" />
+    <Folder Include="Behaviours.Async\" />
+    <Folder Include="Tasks\" />
   </ItemGroup>
 
 </Project>

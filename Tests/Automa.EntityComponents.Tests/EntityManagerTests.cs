@@ -1,6 +1,5 @@
 ﻿using System;
 using Automa.Common;
-using Automa.EntityComponents.Internal;
 using Automa.EntityComponents.Model;
 using NUnit.Framework;
 
@@ -226,13 +225,13 @@ namespace Automa.EntityComponents
             Assert.AreEqual(0, group.RemovingFired);
             foreach (var entity in entities)
             {
-                entity.ChangeType(EntityTypes.Type2);
+                entity.SetType(EntityTypes.Type2);
             }
             Assert.AreEqual(20, group.AddedFired);
             Assert.AreEqual(0, group.RemovingFired);
             foreach (var entity in entities)
             {
-                entity.ChangeType(EntityTypes.Type3);
+                entity.SetType(EntityTypes.Type3);
             }
             Assert.AreEqual(20, group.AddedFired);
             Assert.AreEqual(10, group.RemovingFired);
@@ -268,11 +267,11 @@ namespace Automa.EntityComponents
             }
         }
 
-        private class TestEntity : EntityEnumerator
+        private class TestEntity : EntityIterator
         {
-            public IComponentValue<Entity> Entity;
-            public IComponentValue<Component1> Component1;
-            public IComponentValue<Component2> Component2;
+            public IValue<Entity> Entity;
+            public IValue<Component1> Component1;
+            public IValue<Component2> Component2;
         }
     }
 }

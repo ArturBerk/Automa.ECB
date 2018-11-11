@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Automa.EntityComponents.Internal;
 
-namespace Automa.EntityComponents.Internal
+namespace Automa.EntityComponents
 {
     public class EntityIterator
     {

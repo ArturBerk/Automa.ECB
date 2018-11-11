@@ -59,7 +59,7 @@ namespace Automa.EntityComponents.Internal
             group.Chunks = chunks;
             ComponentArray<Component2> array = new ComponentArray<Component2>();
             array.UpdateChunks(ref chunks);
-            EntityEnumerator enumerator = new EntityEnumerator();
+            var enumerator = new EntityIterator();
             enumerator.ApplyGroup(group);
 
             int entityCount = 0;

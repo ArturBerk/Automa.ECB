@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
+using Automa.EntityComponents.Internal;
 
-namespace Automa.EntityComponents.Internal
+namespace Automa.EntityComponents
 {
     public interface IValue<T>
     {

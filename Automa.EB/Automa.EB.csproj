@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\Automa.Behaviours.Async\BehaviourTree.cs" Link="Behaviours.Async\BehaviourTree.cs" />
+    <Compile Include="..\Automa.Behaviours.Async\BehaviourTreeBuilder.cs" Link="Behaviours.Async\BehaviourTreeBuilder.cs" />
+    <Compile Include="..\Automa.Behaviours.Async\Dependency.cs" Link="Behaviours.Async\Dependency.cs" />
+    <Compile Include="..\Automa.Behaviours.Async\DependencyMode.cs" Link="Behaviours.Async\DependencyMode.cs" />
+    <Compile Include="..\Automa.Behaviours.Async\IAsyncBehaviour.cs" Link="Behaviours.Async\IAsyncBehaviour.cs" />
+    <Compile Include="..\Automa.Behaviours.Async\IDependency.cs" Link="Behaviours.Async\IDependency.cs" />
+    <Compile Include="..\Automa.Behaviours.Async\IMainThreadBehaviour.cs" Link="Behaviours.Async\IMainThreadBehaviour.cs" />
     <Compile Include="..\Automa.Behaviours\BehaviourGroup.cs" Link="Behaviours\BehaviourGroup.cs" />
     <Compile Include="..\Automa.Behaviours\IBehaviour.cs" Link="Behaviours\IBehaviour.cs" />
     <Compile Include="..\Automa.Behaviours\IBehaviourGroup.cs" Link="Behaviours\IBehaviourGroup.cs" />
@@ -15,6 +22,7 @@
     <Compile Include="..\Automa.Context.Behaviours\ContextBehaviourGroup.cs" Link="Context.Behaviours\ContextBehaviourGroup.cs" />
     <Compile Include="..\Automa.Context.Behaviours\IContextBehaviour.cs" Link="Context.Behaviours\IContextBehaviour.cs" />
     <Compile Include="..\Automa.Context.Entities\EntityService.cs" Link="Context.Entities\EntityService.cs" />
+    <Compile Include="..\Automa.Context.Tasks\TasksService.cs" Link="Context.Tasks\TasksService.cs" />
     <Compile Include="..\Automa.Context\Context.cs" Link="Context\Context.cs" />
     <Compile Include="..\Automa.Context\ContextException.cs" Link="Context\ContextException.cs" />
     <Compile Include="..\Automa.Context\IContext.cs" Link="Context\IContext.cs" />
@@ -30,15 +38,23 @@
     <Compile Include="..\Automa.Entities\Internal\EntityCollection.cs" Link="Entities\Internal\EntityCollection.cs" />
     <Compile Include="..\Automa.Entities\Internal\EntityDataCollection.cs" Link="Entities\Internal\EntityDataCollection.cs" />
     <Compile Include="..\Automa.Entities\Internal\EntityType.cs" Link="Entities\Internal\EntityType.cs" />
+    <Compile Include="..\Automa.Tasks\BlockingQueue.cs" Link="Tasks\BlockingQueue.cs" />
+    <Compile Include="..\Automa.Tasks\BlockingQueueSlim.cs" Link="Tasks\BlockingQueueSlim.cs" />
+    <Compile Include="..\Automa.Tasks\ITask.cs" Link="Tasks\ITask.cs" />
+    <Compile Include="..\Automa.Tasks\Properties.cs" Link="Tasks\Properties.cs" />
+    <Compile Include="..\Automa.Tasks\TaskManager.cs" Link="Tasks\TaskManager.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Behaviours.Async\" />
     <Folder Include="Behaviours\" />
     <Folder Include="Common\" />
     <Folder Include="Context\" />
     <Folder Include="Context.Entities\" />
     <Folder Include="Context.Behaviours\" />
     <Folder Include="Entities\Internal\" />
+    <Folder Include="Context.Tasks\" />
+    <Folder Include="Tasks\" />
   </ItemGroup>
 
 </Project>
