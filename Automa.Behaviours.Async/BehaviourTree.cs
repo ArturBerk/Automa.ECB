@@ -1,23 +1,19 @@
-﻿using System;
-using Automa.Tasks;
+﻿using Automa.Tasks;
 
 namespace Automa.Behaviours.Async
 {
     public class BehaviourTree
     {
-        internal class BehaviourTreeGroup
-        {
-            public IDependency[] Dependencies;
-            public IAsyncBehaviour[] Behaviours;
-            public BehaviourTask[] Tasks;
-        }
+        public static IBehaviourTreeBuilder Builder => new BehaviourTreeBuilder();
+
+        private readonly ApplyingTask applyingTask;
 
         internal BehaviourTreeGroup[] Groups;
-        internal IBehaviour[] SyncBehaviours;
         internal IMainThreadBehaviour[] MainThreadBehaviours;
-        private ApplyingTask applyingTask;
+        internal IBehaviour[] SyncBehaviours;
 
-        internal BehaviourTree(BehaviourTreeGroup[] groups, IBehaviour[] syncBehaviours, IMainThreadBehaviour[] mainThreadBehaviours)
+        internal BehaviourTree(BehaviourTreeGroup[] groups, IBehaviour[] syncBehaviours,
+            IMainThreadBehaviour[] mainThreadBehaviours)
         {
             Groups = groups;
             SyncBehaviours = syncBehaviours;
@@ -25,12 +21,26 @@ namespace Automa.Behaviours.Async
             foreach (var behaviourTreeGroup in groups)
             {
                 behaviourTreeGroup.Tasks = new BehaviourTask[behaviourTreeGroup.Behaviours.Length];
-                for (int i = 0; i < behaviourTreeGroup.Tasks.Length; i++)
+                for (var i = 0; i < behaviourTreeGroup.Tasks.Length; i++)
                 {
                     behaviourTreeGroup.Tasks[i] = new BehaviourTask(behaviourTreeGroup.Behaviours[i]);
                 }
             }
             applyingTask = new ApplyingTask(this);
+        }
+
+        public IApplyingHandler Start(TaskManager tasks)
+        {
+            applyingTask.tasks = tasks;
+            tasks.Schedule(applyingTask);
+            return applyingTask;
+        }
+
+        internal class BehaviourTreeGroup
+        {
+            public IAsyncBehaviour[] Behaviours;
+            public IDependency[] Dependencies;
+            public BehaviourTask[] Tasks;
         }
 
         private class ApplyingTask : Task, IApplyingHandler
@@ -43,6 +53,15 @@ namespace Automa.Behaviours.Async
                 this.behaviourTree = behaviourTree;
             }
 
+            public void Complete()
+            {
+                Wait();
+                foreach (var behaviourTreeMainThreadBehaviour in behaviourTree.MainThreadBehaviours)
+                {
+                    behaviourTreeMainThreadBehaviour.Apply();
+                }
+            }
+
             public override void Execute()
             {
                 foreach (var behaviourTreeGroup in behaviourTree.Groups)
@@ -51,20 +70,11 @@ namespace Automa.Behaviours.Async
                     {
                         tasks.Schedule(behaviourTask);
                     }
-                    tasks.WaitAll(behaviourTreeGroup.Tasks);
+                    behaviourTreeGroup.Tasks.WaitAll();
                 }
                 foreach (var behaviourTreeSyncBehaviour in behaviourTree.SyncBehaviours)
                 {
                     behaviourTreeSyncBehaviour.Apply();
-                }
-            }
-
-            public void Complete()
-            {
-                Completed.Wait();
-                foreach (var behaviourTreeMainThreadBehaviour in behaviourTree.MainThreadBehaviours)
-                {
-                    behaviourTreeMainThreadBehaviour.Apply();
                 }
             }
         }
@@ -82,13 +92,6 @@ namespace Automa.Behaviours.Async
             {
                 behaviour.ApplyAsync();
             }
-        } 
-
-        public IApplyingHandler Start(TaskManager tasks)
-        {
-            applyingTask.tasks = tasks;
-            tasks.Schedule(applyingTask);
-            return applyingTask;
         }
 
         public interface IApplyingHandler

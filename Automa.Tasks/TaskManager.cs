@@ -8,8 +8,8 @@ namespace Automa.Tasks
     {
         private readonly ManualResetEventSlim taskCompleted = new ManualResetEventSlim(false);
         private readonly WorkerThread[] threadPool;
+        private readonly BlockingQueue<Task> tasks = new BlockingQueue<Task>();
         private long activeTasks;
-        private int currentIndex;
 
         public TaskManager(int count = 0)
         {
@@ -33,16 +33,16 @@ namespace Automa.Tasks
             }
         }
 
-        public void Schedule(ITask task)
+        public void Schedule(Task task)
         {
-            while (true)
-            {
+            //while (true)
+            //{
+                task.currentTaskManager = this;
                 task.Completed.Reset();
-                var index = Interlocked.Increment(ref currentIndex);
                 Interlocked.Increment(ref activeTasks);
-                threadPool[index].Tasks.Enqueue(task);
-                break;
-            }
+                tasks.Enqueue(task);
+                //break;
+            //}
         }
 
         public void WaitAll()
@@ -55,20 +55,8 @@ namespace Automa.Tasks
             }
         }
 
-        public void WaitAll(IEnumerable<ITask> tasks)
-        {
-            foreach (var task in tasks)
-            {
-                if (!task.Completed.IsSet)
-                {
-                    task.Completed.Wait();
-                }
-            }
-        }
-
         private class WorkerThread : IDisposable
         {
-            public readonly BlockingQueue<ITask> Tasks = new BlockingQueue<ITask>();
             private readonly TaskManager tasksManager;
             private readonly Thread thread;
 
@@ -88,7 +76,7 @@ namespace Automa.Tasks
             {
                 while (true)
                 {
-                    var task = Tasks.Dequeue();
+                    var task = tasksManager.tasks.Dequeue();
                     task.Execute();
                     task.Completed.Set();
                     Interlocked.Decrement(ref tasksManager.activeTasks);

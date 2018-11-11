@@ -5,8 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\Automa.Common\TypeOf.cs" Link="Common\TypeOf.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Automa.Behaviours\Automa.Behaviours.csproj" />
     <ProjectReference Include="..\Automa.Tasks\Automa.Tasks.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\" />
   </ItemGroup>
 
 </Project>

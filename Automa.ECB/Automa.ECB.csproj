@@ -52,10 +52,12 @@
     <Compile Include="..\Automa.EntityComponents\Internal\Group.cs" Link="EntityComponents\Group.cs" />
     <Compile Include="..\Automa.EntityComponents\Internal\HashUtility.cs" Link="EntityComponents\HashUtility.cs" />
     <Compile Include="..\Automa.EntityComponents\IValue.cs" Link="EntityComponents\IValue.cs" />
+    <Compile Include="..\Automa.Tasks\ActionTask.cs" Link="Tasks\ActionTask.cs" />
     <Compile Include="..\Automa.Tasks\BlockingQueue.cs" Link="Tasks\BlockingQueue.cs" />
     <Compile Include="..\Automa.Tasks\BlockingQueueSlim.cs" Link="Tasks\BlockingQueueSlim.cs" />
-    <Compile Include="..\Automa.Tasks\ITask.cs" Link="Tasks\ITask.cs" />
     <Compile Include="..\Automa.Tasks\Properties.cs" Link="Tasks\Properties.cs" />
+    <Compile Include="..\Automa.Tasks\Task.cs" Link="Tasks\Task.cs" />
+    <Compile Include="..\Automa.Tasks\TaskExtensions.cs" Link="Tasks\TaskExtensions.cs" />
     <Compile Include="..\Automa.Tasks\TaskManager.cs" Link="Tasks\TaskManager.cs" />
   </ItemGroup>
   
@@ -68,7 +70,6 @@
     <Folder Include="Context.Behaviours\" />
     <Folder Include="EntityComponents.Behaviours\" />
     <Folder Include="Behaviours.Async\" />
-    <Folder Include="Tasks\" />
   </ItemGroup>
 
 </Project>

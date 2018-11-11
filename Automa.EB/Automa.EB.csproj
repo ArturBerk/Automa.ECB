@@ -38,10 +38,12 @@
     <Compile Include="..\Automa.Entities\Internal\EntityCollection.cs" Link="Entities\Internal\EntityCollection.cs" />
     <Compile Include="..\Automa.Entities\Internal\EntityDataCollection.cs" Link="Entities\Internal\EntityDataCollection.cs" />
     <Compile Include="..\Automa.Entities\Internal\EntityType.cs" Link="Entities\Internal\EntityType.cs" />
+    <Compile Include="..\Automa.Tasks\ActionTask.cs" Link="Tasks\ActionTask.cs" />
     <Compile Include="..\Automa.Tasks\BlockingQueue.cs" Link="Tasks\BlockingQueue.cs" />
     <Compile Include="..\Automa.Tasks\BlockingQueueSlim.cs" Link="Tasks\BlockingQueueSlim.cs" />
-    <Compile Include="..\Automa.Tasks\ITask.cs" Link="Tasks\ITask.cs" />
     <Compile Include="..\Automa.Tasks\Properties.cs" Link="Tasks\Properties.cs" />
+    <Compile Include="..\Automa.Tasks\Task.cs" Link="Tasks\Task.cs" />
+    <Compile Include="..\Automa.Tasks\TaskExtensions.cs" Link="Tasks\TaskExtensions.cs" />
     <Compile Include="..\Automa.Tasks\TaskManager.cs" Link="Tasks\TaskManager.cs" />
   </ItemGroup>
 
