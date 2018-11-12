@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace Automa.Tasks
 {
@@ -13,6 +14,11 @@ namespace Automa.Tasks
         public void Wait()
         {
             Completed.Wait();
+        }
+
+        public void Wait(TimeSpan timeSpan)
+        {
+            Completed.Wait(timeSpan);
         }
     }
 }

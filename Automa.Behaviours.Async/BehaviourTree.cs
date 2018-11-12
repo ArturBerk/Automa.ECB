@@ -1,4 +1,5 @@
-﻿using Automa.Tasks;
+﻿using System;
+using Automa.Tasks;
 
 namespace Automa.Behaviours.Async
 {
@@ -62,6 +63,15 @@ namespace Automa.Behaviours.Async
                 }
             }
 
+            public void Complete(TimeSpan timeSpan)
+            {
+                Wait(timeSpan);
+                foreach (var behaviourTreeMainThreadBehaviour in behaviourTree.MainThreadBehaviours)
+                {
+                    behaviourTreeMainThreadBehaviour.Apply();
+                }
+            }
+
             public override void Execute()
             {
                 foreach (var behaviourTreeGroup in behaviourTree.Groups)
@@ -97,6 +107,7 @@ namespace Automa.Behaviours.Async
         public interface IApplyingHandler
         {
             void Complete();
+            void Complete(TimeSpan timeSpan);
         }
     }
 }

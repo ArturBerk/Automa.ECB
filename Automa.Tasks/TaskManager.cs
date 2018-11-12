@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Threading;
 
 namespace Automa.Tasks
@@ -8,7 +8,7 @@ namespace Automa.Tasks
     {
         private readonly ManualResetEventSlim taskCompleted = new ManualResetEventSlim(false);
         private readonly WorkerThread[] threadPool;
-        private readonly BlockingQueue<Task> tasks = new BlockingQueue<Task>();
+        private readonly BlockingCollection<Task> tasks = new BlockingCollection<Task>();
         private long activeTasks;
 
         public TaskManager(int count = 0)
@@ -40,7 +40,7 @@ namespace Automa.Tasks
                 task.currentTaskManager = this;
                 task.Completed.Reset();
                 Interlocked.Increment(ref activeTasks);
-                tasks.Enqueue(task);
+                tasks.Add(task);
                 //break;
             //}
         }
@@ -53,6 +53,13 @@ namespace Automa.Tasks
                 taskCompleted.Wait();
                 if (Interlocked.Read(ref activeTasks) == 0) break;
             }
+        }
+
+        public event Action<Exception> UnhandledException;
+
+        private void RaiseUnhandledException(Exception e)
+        {
+            UnhandledException?.Invoke(e);
         }
 
         private class WorkerThread : IDisposable
@@ -76,9 +83,19 @@ namespace Automa.Tasks
             {
                 while (true)
                 {
-                    var task = tasksManager.tasks.Dequeue();
-                    task.Execute();
-                    task.Completed.Set();
+                    var task = tasksManager.tasks.Take();
+                    if (task != null)
+                    {
+                        try
+                        {
+                            task.Execute();
+                            task.Completed.Set();
+                        }
+                        catch (Exception e)
+                        {
+                            tasksManager.RaiseUnhandledException(e);
+                        }
+                    }
                     Interlocked.Decrement(ref tasksManager.activeTasks);
                     tasksManager.taskCompleted.Set();
                 }

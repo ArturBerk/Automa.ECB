@@ -54,8 +54,8 @@ namespace Automa.Behaviours.Async.Task
 
             Assert.IsTrue(testBehaviours[0].Executed);
             Assert.IsTrue(testBehaviours[1].Executed);
-            Assert.AreEqual(Thread.CurrentThread, testBehaviours[0].ExecutedThread);
-            Assert.AreEqual(Thread.CurrentThread, testBehaviours[1].ExecutedThread);
+            Assert.AreEqual(Thread.CurrentThread.ManagedThreadId, testBehaviours[0].ExecutedThread);
+            Assert.AreEqual(Thread.CurrentThread.ManagedThreadId, testBehaviours[1].ExecutedThread);
         }
 
         [Test]
