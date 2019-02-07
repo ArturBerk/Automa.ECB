@@ -35,9 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.Tasks", "Automa.Task
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.Context.Tasks", "Automa.Context.Tasks\Automa.Context.Tasks.csproj", "{F57CAAE6-7CEF-44EF-B4BD-041471641347}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automa.Tasks.Tests", "Automa.Tasks.Tests\Automa.Tasks.Tests.csproj", "{85F12FB1-7F72-4C98-A7B4-6A5FC8C1AC11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.Tasks.Tests", "Automa.Tasks.Tests\Automa.Tasks.Tests.csproj", "{85F12FB1-7F72-4C98-A7B4-6A5FC8C1AC11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automa.Behaviours.Async.Task", "Automa.Behaviours.Async.Task\Automa.Behaviours.Async.Task.csproj", "{5E822FCA-5C77-445E-BC06-7D93A47FF2EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.Behaviours.Async.Task", "Automa.Behaviours.Async.Task\Automa.Behaviours.Async.Task.csproj", "{5E822FCA-5C77-445E-BC06-7D93A47FF2EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

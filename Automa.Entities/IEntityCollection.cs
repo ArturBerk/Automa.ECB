@@ -5,6 +5,8 @@
 
     public interface IEntityCollection
     {
+        int Count { get; }
+        object this[int index] { get; }
         void Add(object entity);
         void Remove(object entity);
         void AddReferenced<TReference>(IEntity<TReference> referenced, object entity) where TReference : IEntity<TReference>;
@@ -12,8 +14,7 @@
 
     public interface IEntityCollection<TEntity> : IEntityCollection where TEntity : class
     {
-        int Count { get; }
-        TEntity this[int index] { get; }
+        new TEntity this[int index] { get; }
         void Add<T>(T entity) where T : TEntity, IEntity<TEntity>;
         void Remove<T>(T entity) where T : TEntity, IEntity<TEntity>;
         void AddReferenced<TReference>(IEntity<TReference> referenced, TEntity entity) where TReference : IEntity<TReference>;

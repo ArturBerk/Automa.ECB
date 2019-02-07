@@ -21,6 +21,14 @@ namespace Automa.Behaviours
             behaviours.Add(behaviour);
         }
 
+        public virtual void AddRange(IEnumerable<IBehaviour> newBehaviours)
+        {
+            foreach (var behaviour in newBehaviours)
+            {
+                this.behaviours.Add(behaviour);
+            }
+        }
+
         public virtual bool Remove(IBehaviour slot)
         {
             for (var i = 0; i < behaviours.Count; i++)

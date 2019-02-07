@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Automa.Behaviours;
 
 namespace Automa.Context.Behaviours
@@ -16,6 +17,18 @@ namespace Automa.Context.Behaviours
             if (context != null && behaviour is IContextBehaviour contextBehaviour)
             {
                 contextBehaviour.OnAttach(context);
+            }
+        }
+
+        public override void AddRange(IEnumerable<IBehaviour> newBehaviours)
+        {
+            base.AddRange(newBehaviours);
+            foreach (var newBehaviour in newBehaviours)
+            {
+                if (context != null && newBehaviour is IContextBehaviour contextBehaviour)
+                {
+                    contextBehaviour.OnAttach(context);
+                }
             }
         }
 

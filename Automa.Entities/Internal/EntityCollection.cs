@@ -17,6 +17,7 @@ namespace Automa.Entities.Internal
 
         public int Count => entities.Count;
 
+        object IEntityCollection.this[int index] => entities.Buffer[index];
         public TEntity this[int index] => entities.Buffer[index];
 
         public TEntity[] ToArray()
