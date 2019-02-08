@@ -10,6 +10,7 @@
         void Add(object entity);
         void Remove(object entity);
         void AddReferenced<TReference>(IEntity<TReference> referenced, object entity) where TReference : IEntity<TReference>;
+        void Clear();
     }
 
     public interface IEntityCollection<TEntity> : IEntityCollection where TEntity : class

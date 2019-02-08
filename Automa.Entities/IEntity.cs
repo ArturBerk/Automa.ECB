@@ -1,6 +1,10 @@
 ﻿namespace Automa.Entities
 {
-    public interface IEntity { }
+    public interface IEntity
+    {
+        void Register(IEntityGroup entityGroup);
+        void Unregister();
+    }
 
     public interface IEntity<TEntity> : IEntity
     {

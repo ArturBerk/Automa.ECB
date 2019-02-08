@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 
 namespace Automa.Entities
 {
@@ -7,5 +8,6 @@ namespace Automa.Entities
         IEntityCollection Entities(Type type);
         IEntityCollection<T> Entities<T>() where T : class;
         IEntityDataCollection<T> EntityDatas<T>() where T : struct;
+        void Clear();
     }
 }

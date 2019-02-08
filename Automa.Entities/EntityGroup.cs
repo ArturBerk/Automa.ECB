@@ -57,5 +57,20 @@ namespace Automa.Entities
             }
             return entityCollection;
         }
+
+        public void Clear()
+        {
+            foreach (var entityList in entityLists)
+            {
+                if (entityList is IEntityCollection entityCollection)
+                {
+                    entityCollection.Clear();
+                }
+                if (entityList is IEntityDataCollection entityDataCollection)
+                {
+                    entityDataCollection.Clear();
+                }
+            }
+        }
     }
 }

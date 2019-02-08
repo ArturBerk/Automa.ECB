@@ -78,6 +78,23 @@ namespace Automa.Entities.Internal
             AddReferenced(referenced, (TEntity)entity);
         }
 
+        public void Clear()
+        {
+            for (var index = 0; index < entities.Count; index++)
+            {
+                var entity = entities.Buffer[index];
+                Removed?.Invoke(entity);
+            }
+
+            for (int i = 0; i < references.Count; i++)
+            {
+                references[i].Child?.ClassEntityCollection.RemoveBlind(references[i].Child);
+                references[i].Clear();
+            }
+            references.Clear();
+            entities.Clear();
+        }
+
         public void AddReferenced<TReferenced>(IEntity<TReferenced> referenced, TEntity entity) where TReferenced : IEntity<TReferenced>
         {
             if (referenced.Reference == null)
@@ -192,6 +209,7 @@ namespace Automa.Entities.Internal
 
             public void Dispose()
             {
+                if (Index < 0) return;
                 ((IEntity<TEntity>)Entity).Reference = null;
                 Collection.Remove(this);
             }

@@ -46,9 +46,25 @@ namespace Automa.Entities.Internal
                 references[reference.Index].Index = reference.Index;
             }
             entities.UnorderedRemoveAt(reference.Index);
-            reference.Index = -1;
+            reference.Clear();
             referencePool.Add(reference);
             Removed?.Invoke(ref removeEntity);
+        }
+
+        public void Clear()
+        {
+            for (var index = 0; index < entities.Buffer.Length; index++)
+            {
+                var entity = entities.Buffer[index];
+                Removed?.Invoke(ref entity);
+            }
+
+            for (int i = 0; i < references.Count; i++)
+            {
+                references[i].Clear();
+            }
+            references.Clear();
+            entities.Clear();
         }
 
         private StructReference GetReference()
@@ -75,6 +91,11 @@ namespace Automa.Entities.Internal
             public int Index;
             public ref TEntity Entity => ref Collection.entities[Index];
 
+            public void Clear()
+            {
+                Index = -1;
+            }
+
             public override string ToString()
             {
                 return $"{Index} at {typeof(TEntity).Name}";
@@ -82,6 +103,7 @@ namespace Automa.Entities.Internal
 
             public void Dispose()
             {
+                if (Index == -1) return;
                 ((IEntity<TEntity>)Entity).Reference = null;
                 Collection.Remove(this);
             }
