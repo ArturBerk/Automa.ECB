@@ -257,7 +257,7 @@ namespace Automa.Common
 
         private void AllocateMore()
         {
-            var newList = new T[Math.Max(Buffer.Length << 1, MinSize)];
+            var newList = new T[Math.Max(Buffer.Length == 0 ? 4 : (int)Math.Ceiling(Buffer.Length * 1.4), MinSize)];
             if (Count > 0) Buffer.CopyTo(newList, 0);
             Buffer = newList;
         }
@@ -267,7 +267,7 @@ namespace Automa.Common
             var oldLength = Math.Max(Buffer.Length, MinSize);
 
             while (oldLength < newSize)
-                oldLength <<= 1;
+                oldLength = (int)Math.Ceiling(oldLength * 1.4);
 
             var newList = new T[oldLength];
             if (Count > 0) Array.Copy(Buffer, newList, Count);
