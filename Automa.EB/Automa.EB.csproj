@@ -59,4 +59,8 @@
     <Folder Include="Tasks\" />
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy $(OutDir)Automa.EB.dll C:\UnityProjects\Automa\Assets\Plugins\Automa.EB.dll /Y&#xD;&#xA;xcopy $(OutDir)Automa.EB.pdb C:\UnityProjects\Automa\Assets\Plugins\Automa.EB.pdb /Y" />
+  </Target>
+
 </Project>

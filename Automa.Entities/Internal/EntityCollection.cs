@@ -88,7 +88,11 @@ namespace Automa.Entities.Internal
 
             for (int i = 0; i < references.Count; i++)
             {
-                references[i].Child?.ClassEntityCollection.RemoveBlind(references[i].Child);
+                var child = references[i].Child;
+                if (child != null && !child.IsDisposed)
+                {
+                    child.ClassEntityCollection.RemoveBlind(child);
+                }
                 references[i].Clear();
             }
             references.Clear();
@@ -201,6 +205,7 @@ namespace Automa.Entities.Internal
             }
 
             public override IClassEntityCollection ClassEntityCollection => Collection;
+            public override bool IsDisposed => Index < 0;
 
             public override string ToString()
             {
@@ -222,5 +227,6 @@ namespace Automa.Entities.Internal
         public bool IsChild;
         public abstract void Clear();
         public abstract IClassEntityCollection ClassEntityCollection { get; }
+        public abstract bool IsDisposed { get; }
     }
 }

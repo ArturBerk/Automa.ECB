@@ -39,6 +39,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.Tasks.Tests", "Autom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Automa.Behaviours.Async.Task", "Automa.Behaviours.Async.Task\Automa.Behaviours.Async.Task.csproj", "{5E822FCA-5C77-445E-BC06-7D93A47FF2EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Automa.EB.Tests", "Tests\Automa.EB.Tests\Automa.EB.Tests.csproj", "{F3B289E0-7870-4B3F-8565-0E1CFBD555E4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,6 +115,10 @@ Global
 		{5E822FCA-5C77-445E-BC06-7D93A47FF2EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E822FCA-5C77-445E-BC06-7D93A47FF2EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E822FCA-5C77-445E-BC06-7D93A47FF2EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3B289E0-7870-4B3F-8565-0E1CFBD555E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3B289E0-7870-4B3F-8565-0E1CFBD555E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3B289E0-7870-4B3F-8565-0E1CFBD555E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3B289E0-7870-4B3F-8565-0E1CFBD555E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +128,7 @@ Global
 		{2B4B760F-6F1D-4340-AFE9-1B9691F11E09} = {F6E86985-AE1A-46D1-8094-9EE12392AD03}
 		{85F12FB1-7F72-4C98-A7B4-6A5FC8C1AC11} = {F6E86985-AE1A-46D1-8094-9EE12392AD03}
 		{5E822FCA-5C77-445E-BC06-7D93A47FF2EB} = {F6E86985-AE1A-46D1-8094-9EE12392AD03}
+		{F3B289E0-7870-4B3F-8565-0E1CFBD555E4} = {F6E86985-AE1A-46D1-8094-9EE12392AD03}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57BCE530-DA4F-436D-AA16-EDFB799CF56E}

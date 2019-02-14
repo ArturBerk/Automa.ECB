@@ -2,6 +2,7 @@
 {
     public interface IEntity
     {
+        bool IsRegistered { get; }
         void Register(IEntityGroup entityGroup);
         void Unregister();
     }
