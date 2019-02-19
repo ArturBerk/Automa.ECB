@@ -18,6 +18,30 @@ namespace Automa.Entities.Internal
         public int Count => entities.Count;
 
         object IEntityCollection.this[int index] => entities.Buffer[index];
+
+        public IEntityReference<TEntity> GetReference(int index)
+        {
+            return references[index];
+        }
+
+        public IEntityReference<TEntity> Add(TEntity entity)
+        {
+            var reference = GetReference();
+            reference.Index = entities.Count;
+            references.SetAt(reference.Index, reference);
+            entities.SetAt(reference.Index, entity);
+            Added?.Invoke(entities.Buffer[reference.Index]);
+            return reference;
+        }
+
+        public void Remove(IEntityReference<TEntity> reference)
+        {
+            var classReference = (ClassReference)reference;
+            if (classReference.IsChild)
+                throw new EntitiesException("Can't remove referenced entity, remove root entity");
+            Remove(classReference);
+        }
+
         public TEntity this[int index] => entities.Buffer[index];
 
         public TEntity[] ToArray()
@@ -97,6 +121,11 @@ namespace Automa.Entities.Internal
             }
             references.Clear();
             entities.Clear();
+        }
+
+        public void AddReferenced<TReference>(IEntityReference<TReference> reference, TEntity entity)
+        {
+            throw new NotImplementedException();
         }
 
         public void AddReferenced<TReferenced>(IEntity<TReferenced> referenced, TEntity entity) where TReferenced : IEntity<TReferenced>

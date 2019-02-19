@@ -9,11 +9,12 @@
         void Clear();
     }
 
-    public interface IEntityDataCollection<TEntity> : IEntityDataCollection
+    public interface IEntityDataCollection<TEntity> : IEntityDataCollection where TEntity : struct
     {
         ref TEntity this[int index] { get; }
-        void Add<T>(ref T entity) where T : struct, TEntity, IEntity<TEntity>;
-        void Remove<T>(ref T entity) where T : struct, TEntity, IEntity<TEntity>;
+        IEntityReference<TEntity> GetReference(int index);
+        IEntityReference<TEntity> Add(ref TEntity entity);
+        void Remove(IEntityReference<TEntity> entity);
         event EntityDataAddedHandler<TEntity> Added;
         event EntityDataRemovedHandler<TEntity> Removed;
     }

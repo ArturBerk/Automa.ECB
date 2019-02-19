@@ -3,7 +3,7 @@ using Automa.Common;
 
 namespace Automa.Entities.Internal
 {
-    internal class EntityDataCollection<TEntity> : IEntityDataCollection<TEntity>
+    internal class EntityDataCollection<TEntity> : IEntityDataCollection<TEntity> where TEntity : struct
     {
         private static ArrayList<StructReference> referencePool = new ArrayList<StructReference>(4);
 
@@ -17,25 +17,24 @@ namespace Automa.Entities.Internal
         public event EntityDataAddedHandler<TEntity> Added;
         public event EntityDataRemovedHandler<TEntity> Removed;
 
-        public void Add<T>(ref T entity) where T : struct, TEntity, IEntity<TEntity>
+        public IEntityReference<TEntity> GetReference(int index)
         {
-            if (entity.Reference != null)
-                throw new EntitiesException("Entity already added to entity group");
+            return references[index];
+        }
+
+        public IEntityReference<TEntity> Add(ref TEntity entity)
+        {
             var reference = GetReference();
             reference.Index = entities.Count;
             references.SetAt(reference.Index, reference);
-            entity.Reference = reference;
             entities.SetAt(reference.Index, entity);
             Added?.Invoke(ref entities.Buffer[reference.Index]);
+            return reference;
         }
 
-        public void Remove<T>(ref T entity) where T : struct, TEntity, IEntity<TEntity>
+        public void Remove(IEntityReference<TEntity> reference)
         {
-            if (entity.Reference == null)
-                throw new EntitiesException("Entity not added to entity group");
-            var reference = (StructReference)entity.Reference;
-            Remove(reference);
-            entity.Reference = null;
+            Remove((StructReference)reference);
         }
 
         private void Remove(StructReference reference)
@@ -63,6 +62,7 @@ namespace Automa.Entities.Internal
             {
                 references[i].Clear();
             }
+            referencePool.AddRange(references.Buffer, references.Count);
             references.Clear();
             entities.Clear();
         }

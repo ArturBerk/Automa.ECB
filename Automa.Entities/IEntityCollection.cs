@@ -16,10 +16,18 @@
     public interface IEntityCollection<TEntity> : IEntityCollection where TEntity : class
     {
         new TEntity this[int index] { get; }
+        IEntityReference<TEntity> GetReference(int index);
+
+        IEntityReference<TEntity> Add(TEntity entity);
+        void Remove(IEntityReference<TEntity> entity);
+
         void Add<T>(T entity) where T : TEntity, IEntity<TEntity>;
         void Remove<T>(T entity) where T : TEntity, IEntity<TEntity>;
+
+        void AddReferenced<TReference>(IEntityReference<TReference> reference, TEntity entity);
         void AddReferenced<TReference>(IEntity<TReference> referenced, TEntity entity) where TReference : IEntity<TReference>;
         void AddReferenced<TReference>(TReference entity) where TReference : TEntity, IEntity<TReference>;
+
         TEntity[] ToArray();
         event EntityAddedHandler<TEntity> Added;
         event EntityRemovedHandler<TEntity> Removed;
