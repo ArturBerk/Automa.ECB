@@ -12,6 +12,7 @@
     <Compile Include="..\Automa.Behaviours.Async\IAsyncBehaviour.cs" Link="Behaviours.Async\IAsyncBehaviour.cs" />
     <Compile Include="..\Automa.Behaviours.Async\IDependency.cs" Link="Behaviours.Async\IDependency.cs" />
     <Compile Include="..\Automa.Behaviours.Async\IMainThreadBehaviour.cs" Link="Behaviours.Async\IMainThreadBehaviour.cs" />
+    <Compile Include="..\Automa.Behaviours\AfterAttribute.cs" Link="Behaviours\AfterAttribute.cs" />
     <Compile Include="..\Automa.Behaviours\BehaviourGroup.cs" Link="Behaviours\BehaviourGroup.cs" />
     <Compile Include="..\Automa.Behaviours\IBehaviour.cs" Link="Behaviours\IBehaviour.cs" />
     <Compile Include="..\Automa.Behaviours\IBehaviourGroup.cs" Link="Behaviours\IBehaviourGroup.cs" />
@@ -30,11 +31,14 @@
     <Compile Include="..\Automa.Context\IUpdateService.cs" Link="Context\IUpdateService.cs" />
     <Compile Include="..\Automa.Entities\EntitiesException.cs" Link="Entities\EntitiesException.cs" />
     <Compile Include="..\Automa.Entities\EntityGroup.cs" Link="Entities\EntityGroup.cs" />
+    <Compile Include="..\Automa.Entities\IBaseEntityCollection.cs" Link="Entities\IBaseEntityCollection.cs" />
+    <Compile Include="..\Automa.Entities\IDataCollection.cs" Link="Entities\IDataCollection.cs" />
     <Compile Include="..\Automa.Entities\IEntity.cs" Link="Entities\IEntity.cs" />
     <Compile Include="..\Automa.Entities\IEntityCollection.cs" Link="Entities\IEntityCollection.cs" />
     <Compile Include="..\Automa.Entities\IEntityDataCollection.cs" Link="Entities\IEntityDataCollection.cs" />
     <Compile Include="..\Automa.Entities\IEntityGroup.cs" Link="Entities\IEntityGroup.cs" />
     <Compile Include="..\Automa.Entities\IEntityReference.cs" Link="Entities\IEntityReference.cs" />
+    <Compile Include="..\Automa.Entities\Internal\DataCollection.cs" Link="Entities\Internal\DataCollection.cs" />
     <Compile Include="..\Automa.Entities\Internal\EntityCollection.cs" Link="Entities\Internal\EntityCollection.cs" />
     <Compile Include="..\Automa.Entities\Internal\EntityDataCollection.cs" Link="Entities\Internal\EntityDataCollection.cs" />
     <Compile Include="..\Automa.Entities\Internal\EntityType.cs" Link="Entities\Internal\EntityType.cs" />
@@ -60,7 +64,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy $(OutDir)Automa.EB.dll C:\UnityProjects\Automa\Assets\Plugins\Automa.EB.dll /Y&#xD;&#xA;xcopy $(OutDir)Automa.EB.pdb C:\UnityProjects\Automa\Assets\Plugins\Automa.EB.pdb /Y" />
+    <Exec Command="xcopy $(OutDir)Automa.EB.dll C:\UnityProjects\Automa\Assets\Plugins\Automa.EB.dll /Y&#xD;&#xA;xcopy $(OutDir)Automa.EB.pdb C:\UnityProjects\Automa\Assets\Plugins\Automa.EB.pdb /Y&#xD;&#xA;xcopy $(OutDir)Automa.EB.dll C:\UnityProjects\Convoy\Assets\Plugins\Automa.EB.dll /Y&#xD;&#xA;xcopy $(OutDir)Automa.EB.pdb C:\UnityProjects\Convoy\Assets\Plugins\Automa.EB.pdb /Y" />
   </Target>
 
 </Project>

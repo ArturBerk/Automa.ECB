@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using Automa.Common;
 
 namespace Automa.Behaviours
@@ -18,6 +19,20 @@ namespace Automa.Behaviours
 
         public virtual void Add(IBehaviour behaviour)
         {
+            var behaviourType = behaviour.GetType();
+            for (var i = 0; i < behaviours.Count; i++)
+            {
+                var behaviour1 = behaviours[i];
+                foreach (var afterAttribute in behaviour1.GetType().GetCustomAttributes<AfterAttribute>())
+                {
+                    if (afterAttribute.Type.IsAssignableFrom(behaviourType))
+                    {
+                        // insert here
+                        behaviours.Insert(i, behaviour);
+                        return;
+                    }
+                }
+            }
             behaviours.Add(behaviour);
         }
 
@@ -25,7 +40,7 @@ namespace Automa.Behaviours
         {
             foreach (var behaviour in newBehaviours)
             {
-                this.behaviours.Add(behaviour);
+                Add(behaviour);
             }
         }
 
@@ -41,11 +56,14 @@ namespace Automa.Behaviours
             return false;
         }
 
+        public bool IsEnabled { get; set; } = true;
+
         public void Apply()
         {
+            if (!IsEnabled) return;
             for (var i = 0; i < behaviours.Count; i++)
             {
-                behaviours[i].Apply();
+                if (behaviours[i].IsEnabled) behaviours[i].Apply();
             }
         }
     }

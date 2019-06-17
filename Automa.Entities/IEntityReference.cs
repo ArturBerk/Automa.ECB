@@ -2,7 +2,12 @@
 
 namespace Automa.Entities
 {
-    public interface IEntityReference<TEntity> : IDisposable
+    public interface IEntityReference : IDisposable
+    {
+        bool IsValid { get; }
+    }
+
+    public interface IEntityReference<TEntity> : IEntityReference
     {
         ref TEntity Entity { get; }
     }

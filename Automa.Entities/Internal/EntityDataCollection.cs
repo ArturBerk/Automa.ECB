@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Automa.Common;
 
 namespace Automa.Entities.Internal
@@ -12,6 +13,8 @@ namespace Automa.Entities.Internal
 
         public int Count => entities.Count;
 
+        public Type Type => TypeOf<TEntity>.Type;
+
         public ref TEntity this[int index] => ref entities.Buffer[index];
 
         public event EntityDataAddedHandler<TEntity> Added;
@@ -20,6 +23,16 @@ namespace Automa.Entities.Internal
         public IEntityReference<TEntity> GetReference(int index)
         {
             return references[index];
+        }
+
+        public IEntityReference<TEntity> Add(TEntity entity)
+        {
+            var reference = GetReference();
+            reference.Index = entities.Count;
+            references.SetAt(reference.Index, reference);
+            entities.SetAt(reference.Index, entity);
+            Added?.Invoke(ref entities.Buffer[reference.Index]);
+            return reference;
         }
 
         public IEntityReference<TEntity> Add(ref TEntity entity)
@@ -39,7 +52,7 @@ namespace Automa.Entities.Internal
 
         private void Remove(StructReference reference)
         {
-            var removeEntity = entities.Buffer[reference.Index];
+            ref var removeEntity = ref entities.Buffer[reference.Index];
             if (references.UnorderedRemoveAt(reference.Index))
             {
                 references[reference.Index].Index = reference.Index;
@@ -67,6 +80,23 @@ namespace Automa.Entities.Internal
             entities.Clear();
         }
 
+        public void Remove(int i)
+        {
+            ref var removeEntity = ref entities.Buffer[i];
+
+            var structReference = references[i];
+            structReference.Clear();
+            referencePool.Add(structReference);
+
+            if (references.UnorderedRemoveAt(i))
+            {
+                references[i].Index = i;
+            }
+
+            entities.UnorderedRemoveAt(i);
+            Removed?.Invoke(ref removeEntity);
+        }
+
         private StructReference GetReference()
         {
             StructReference reference = null;
@@ -89,6 +119,7 @@ namespace Automa.Entities.Internal
         {
             public EntityDataCollection<TEntity> Collection;
             public int Index;
+            public bool IsValid => Index >= 0;
             public ref TEntity Entity => ref Collection.entities[Index];
 
             public void Clear()
@@ -104,7 +135,6 @@ namespace Automa.Entities.Internal
             public void Dispose()
             {
                 if (Index == -1) return;
-                ((IEntity<TEntity>)Entity).Reference = null;
                 Collection.Remove(this);
             }
         }

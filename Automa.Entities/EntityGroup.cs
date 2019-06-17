@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Globalization;
-using System.Reflection;
+using System.Collections.Generic;
 using Automa.Common;
 using Automa.Entities.Internal;
 
@@ -8,20 +7,57 @@ namespace Automa.Entities
 {
     public class EntityGroup : IEntityGroup
     {
-        private ArrayList<object> entityLists = new ArrayList<object>(4);
+        private ArrayList<IBaseEntityCollection> entityCollections = new ArrayList<IBaseEntityCollection>(4);
+        private ArrayList<IBaseEntityCollection> dataCollections = new ArrayList<IBaseEntityCollection>(4);
+
+        public IEnumerable<Type> RegisteredEntityTypes
+        {
+            get
+            {
+                for (int i = 0; i < entityCollections.Count; i++)
+                {
+                    if (entityCollections[i] is IEntityCollection collection)
+                        yield return collection.Type;
+                }
+            }
+        }
+
+        public IEnumerable<Type> RegisteredEntityDataTypes
+        {
+            get
+            {
+                for (int i = 0; i < entityCollections.Count; i++)
+                {
+                    if (entityCollections[i] is IEntityDataCollection collection)
+                        yield return collection.Type;
+                }
+            }
+        }
+
+        public IEnumerable<Type> RegisteredDataTypes
+        {
+            get
+            {
+                for (int i = 0; i < entityCollections.Count; i++)
+                {
+                    var collection = dataCollections[i];
+                    if (collection != null) yield return collection.Type;
+                }
+            }
+        }
 
         public IEntityCollection Entities(Type type)
         {
             IEntityCollection entityCollection;
             var entityType = EntityTypeManager.GetTypeIndex(type);
-            if (entityLists.Count <= entityType)
+            if (entityCollections.Count <= entityType || entityCollections[entityType] == null)
             {
                 entityCollection = (IEntityCollection)Activator.CreateInstance(typeof(EntityCollection<>).MakeGenericType(type));
-                entityLists.SetAt(entityType, entityCollection);
+                entityCollections.SetAt(entityType, entityCollection);
             }
             else
             {
-                entityCollection = (IEntityCollection)entityLists[entityType];
+                entityCollection = (IEntityCollection)entityCollections[entityType];
             }
             return entityCollection;
         }
@@ -30,14 +66,14 @@ namespace Automa.Entities
         {
             EntityCollection<T> entityCollection;
             var entityType = EntityTypeManager.GetTypeIndex<T>();
-            if (entityLists.Count <= entityType)
+            if (entityCollections.Count <= entityType || entityCollections[entityType] == null)
             {
                 entityCollection = new EntityCollection<T>();
-                entityLists.SetAt(entityType, entityCollection);
+                entityCollections.SetAt(entityType, entityCollection);
             }
             else
             {
-                entityCollection = (EntityCollection<T>) entityLists[entityType];
+                entityCollection = (EntityCollection<T>) entityCollections[entityType];
             }
             return entityCollection;
         }
@@ -46,30 +82,44 @@ namespace Automa.Entities
         {
             EntityDataCollection<T> entityCollection;
             var entityType = EntityTypeManager.GetTypeIndex<T>();
-            if (entityLists.Count <= entityType)
+            if (entityCollections.Count <= entityType || entityCollections[entityType] == null)
             {
                 entityCollection = new EntityDataCollection<T>();
-                entityLists.SetAt(entityType, entityCollection);
+                entityCollections.SetAt(entityType, entityCollection);
             }
             else
             {
-                entityCollection = (EntityDataCollection<T>) entityLists[entityType];
+                entityCollection = (EntityDataCollection<T>) entityCollections[entityType];
+            }
+            return entityCollection;
+        }
+
+        public IDataCollection<T> Datas<T>() where T : struct
+        {
+            DataCollection<T> entityCollection;
+            var entityType = EntityTypeManager.GetTypeIndex<T>();
+            if (entityCollections.Count <= entityType || entityCollections[entityType] == null)
+            {
+                entityCollection = new DataCollection<T>();
+                entityCollections.SetAt(entityType, entityCollection);
+                dataCollections.Add(entityCollection);
+            }
+            else
+            {
+                entityCollection = (DataCollection<T>)entityCollections[entityType];
             }
             return entityCollection;
         }
 
         public void Clear()
         {
-            foreach (var entityList in entityLists)
+            foreach (var entityList in entityCollections)
             {
-                if (entityList is IEntityCollection entityCollection)
-                {
-                    entityCollection.Clear();
-                }
-                if (entityList is IEntityDataCollection entityDataCollection)
-                {
-                    entityDataCollection.Clear();
-                }
+                entityList?.Clear();
+            }
+            foreach (var baseEntityCollection in dataCollections)
+            {
+                baseEntityCollection?.Clear();
             }
         }
     }

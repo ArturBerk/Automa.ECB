@@ -2,6 +2,6 @@
 {
     public interface IUpdateService
     {
-        void Update();
+        void UpdateService();
     }
 }

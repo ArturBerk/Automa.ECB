@@ -2,6 +2,7 @@
 {
     public interface IBehaviour
     {
+        bool IsEnabled { get; set; }
         void Apply();
     }
 }

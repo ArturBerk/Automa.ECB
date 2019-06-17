@@ -3,14 +3,12 @@
     public delegate void EntityAddedHandler<in TEntity>(TEntity entity);
     public delegate void EntityRemovedHandler<in TEntity>(TEntity entity);
 
-    public interface IEntityCollection
+    public interface IEntityCollection : IBaseEntityCollection
     {
-        int Count { get; }
         object this[int index] { get; }
         void Add(object entity);
         void Remove(object entity);
         void AddReferenced<TReference>(IEntity<TReference> referenced, object entity) where TReference : IEntity<TReference>;
-        void Clear();
     }
 
     public interface IEntityCollection<TEntity> : IEntityCollection where TEntity : class

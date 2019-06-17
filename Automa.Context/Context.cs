@@ -52,7 +52,7 @@ namespace Automa.Context
             for (var index = 0; index < updateServices.Count; index++)
             {
                 var updateService = updateServices[index];
-                updateService.Update();
+                updateService.UpdateService();
             }
         }
     }

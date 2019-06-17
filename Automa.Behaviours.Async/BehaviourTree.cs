@@ -59,7 +59,7 @@ namespace Automa.Behaviours.Async
                 Wait();
                 foreach (var behaviourTreeMainThreadBehaviour in behaviourTree.MainThreadBehaviours)
                 {
-                    behaviourTreeMainThreadBehaviour.Apply();
+                    behaviourTreeMainThreadBehaviour.ApplyMainThread();
                 }
             }
 
@@ -68,7 +68,7 @@ namespace Automa.Behaviours.Async
                 Wait(timeSpan);
                 foreach (var behaviourTreeMainThreadBehaviour in behaviourTree.MainThreadBehaviours)
                 {
-                    behaviourTreeMainThreadBehaviour.Apply();
+                    behaviourTreeMainThreadBehaviour.ApplyMainThread();
                 }
             }
 

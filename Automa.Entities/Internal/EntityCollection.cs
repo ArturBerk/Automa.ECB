@@ -17,6 +17,8 @@ namespace Automa.Entities.Internal
 
         public int Count => entities.Count;
 
+        public Type Type => TypeOf<TEntity>.Type;
+
         object IEntityCollection.this[int index] => entities.Buffer[index];
 
         public IEntityReference<TEntity> GetReference(int index)
@@ -60,7 +62,7 @@ namespace Automa.Entities.Internal
             {
                 throw new EntitiesException($"Entity must implement \"{typeof(TEntity)}\" and \"{typeof(IEntity<TEntity>)}\"");
             }
-            if (entityWithReference.Reference != null)
+            if (entityWithReference.Reference != null && entityWithReference.Reference.IsValid)
                 throw new EntitiesException("Entity already added to entity group");
             var reference = GetReference();
             reference.Index = entities.Count;
@@ -123,9 +125,23 @@ namespace Automa.Entities.Internal
             entities.Clear();
         }
 
-        public void AddReferenced<TReference>(IEntityReference<TReference> reference, TEntity entity)
+        public void AddReferenced<TReference>(IEntityReference<TReference> baseReference, TEntity entity)
         {
-            throw new NotImplementedException();
+            // Add entity
+            var reference = GetReference();
+            reference.Index = entities.Count;
+            references.SetAt(reference.Index, reference);
+            entities.SetAt(reference.Index, entity);
+            Added?.Invoke(entities.Buffer[reference.Index]);
+
+            // Connect to parent
+            reference.IsChild = true;
+            var linkedReference = (LinkedReference)baseReference;
+            while (linkedReference.Child != null)
+            {
+                linkedReference = linkedReference.Child;
+            }
+            linkedReference.Child = reference;
         }
 
         public void AddReferenced<TReferenced>(IEntity<TReferenced> referenced, TEntity entity) where TReferenced : IEntity<TReferenced>
@@ -197,6 +213,21 @@ namespace Automa.Entities.Internal
             Removed?.Invoke(entity);
         }
 
+        public void Remove(int index)
+        {
+            var entity = entities.Buffer[index];
+            var classReference = references[index];
+            if (references.UnorderedRemoveAt(index))
+            {
+                references[index].Index = index;
+            }
+            entities.UnorderedRemoveAt(index);
+            classReference.Child?.ClassEntityCollection.RemoveBlind(classReference.Child);
+            classReference.Clear();
+            referencePool.Add(classReference);
+            Removed?.Invoke(entity);
+        }
+
         public void RemoveBlind(object reference)
         {
             Remove((ClassReference)reference);
@@ -224,6 +255,7 @@ namespace Automa.Entities.Internal
         {
             public EntityCollection<TEntity> Collection;
             public int Index;
+            public bool IsValid => Index >= 0;
             public ref TEntity Entity => ref Collection.entities[Index];
 
             public override void Clear()
@@ -244,7 +276,10 @@ namespace Automa.Entities.Internal
             public void Dispose()
             {
                 if (Index < 0) return;
-                ((IEntity<TEntity>)Entity).Reference = null;
+                if (Entity is IEntity<TEntity> entity)
+                {
+                    entity.Reference = null;
+                }
                 Collection.Remove(this);
             }
         }
