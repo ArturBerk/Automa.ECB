@@ -7,119 +7,77 @@ namespace Automa.Entities
 {
     public class EntityGroup : IEntityGroup
     {
-        private ArrayList<IBaseEntityCollection> entityCollections = new ArrayList<IBaseEntityCollection>(4);
-        private ArrayList<IBaseEntityCollection> dataCollections = new ArrayList<IBaseEntityCollection>(4);
+        private Dictionary<Type, IEntityCollection> entityCollections = new Dictionary<Type, IEntityCollection>(20);
+        private Dictionary<Type, IEntityDataCollection> entityDataCollections = new Dictionary<Type, IEntityDataCollection>(20);
+        private Dictionary<Type, IEntityDataCollection> dataCollections = new Dictionary<Type, IEntityDataCollection>(20);
 
-        public IEnumerable<Type> RegisteredEntityTypes
-        {
-            get
-            {
-                for (int i = 0; i < entityCollections.Count; i++)
-                {
-                    if (entityCollections[i] is IEntityCollection collection)
-                        yield return collection.Type;
-                }
-            }
-        }
+        public IEnumerable<Type> RegisteredEntityTypes => entityCollections.Keys;
 
-        public IEnumerable<Type> RegisteredEntityDataTypes
-        {
-            get
-            {
-                for (int i = 0; i < entityCollections.Count; i++)
-                {
-                    if (entityCollections[i] is IEntityDataCollection collection)
-                        yield return collection.Type;
-                }
-            }
-        }
+        public IEnumerable<Type> RegisteredEntityDataTypes => entityDataCollections.Keys;
 
-        public IEnumerable<Type> RegisteredDataTypes
-        {
-            get
-            {
-                for (int i = 0; i < entityCollections.Count; i++)
-                {
-                    var collection = dataCollections[i];
-                    if (collection != null) yield return collection.Type;
-                }
-            }
-        }
+        public IEnumerable<Type> RegisteredDataTypes => dataCollections.Keys;
 
         public IEntityCollection Entities(Type type)
         {
-            IEntityCollection entityCollection;
-            var entityType = EntityTypeManager.GetTypeIndex(type);
-            if (entityCollections.Count <= entityType || entityCollections[entityType] == null)
+            if (!entityCollections.TryGetValue(type, out var entityCollection))
             {
-                entityCollection = (IEntityCollection)Activator.CreateInstance(typeof(EntityCollection<>).MakeGenericType(type));
-                entityCollections.SetAt(entityType, entityCollection);
-            }
-            else
-            {
-                entityCollection = (IEntityCollection)entityCollections[entityType];
+                entityCollection =
+                    (IEntityCollection) Activator.CreateInstance(typeof(EntityCollection<>).MakeGenericType(type));
+                entityCollections.Add(type, entityCollection);
             }
             return entityCollection;
         }
 
         public IEntityCollection<T> Entities<T>() where T : class
         {
-            EntityCollection<T> entityCollection;
-            var entityType = EntityTypeManager.GetTypeIndex<T>();
-            if (entityCollections.Count <= entityType || entityCollections[entityType] == null)
+            if (!entityCollections.TryGetValue(TypeOf<T>.Type, out var entityCollection))
             {
                 entityCollection = new EntityCollection<T>();
-                entityCollections.SetAt(entityType, entityCollection);
+                entityCollections.Add(TypeOf<T>.Type, entityCollection);
             }
-            else
-            {
-                entityCollection = (EntityCollection<T>) entityCollections[entityType];
-            }
-            return entityCollection;
+            return (IEntityCollection<T>) entityCollection;
         }
 
         public IEntityDataCollection<T> EntityDatas<T>() where T : struct
         {
-            EntityDataCollection<T> entityCollection;
-            var entityType = EntityTypeManager.GetTypeIndex<T>();
-            if (entityCollections.Count <= entityType || entityCollections[entityType] == null)
+            if (!entityDataCollections.TryGetValue(TypeOf<T>.Type, out var entityCollection))
             {
                 entityCollection = new EntityDataCollection<T>();
-                entityCollections.SetAt(entityType, entityCollection);
+                entityDataCollections.Add(TypeOf<T>.Type, entityCollection);
             }
-            else
-            {
-                entityCollection = (EntityDataCollection<T>) entityCollections[entityType];
-            }
-            return entityCollection;
+            return (IEntityDataCollection<T>)entityCollection;
         }
 
         public IDataCollection<T> Datas<T>() where T : struct
         {
-            DataCollection<T> entityCollection;
-            var entityType = EntityTypeManager.GetTypeIndex<T>();
-            if (entityCollections.Count <= entityType || entityCollections[entityType] == null)
+            if (!dataCollections.TryGetValue(TypeOf<T>.Type, out var entityCollection))
             {
                 entityCollection = new DataCollection<T>();
-                entityCollections.SetAt(entityType, entityCollection);
-                dataCollections.Add(entityCollection);
+                dataCollections.Add(TypeOf<T>.Type, entityCollection);
             }
-            else
-            {
-                entityCollection = (DataCollection<T>)entityCollections[entityType];
-            }
-            return entityCollection;
+            return (IDataCollection<T>)entityCollection;
         }
 
-        public void Clear()
+        public void Clear(bool clearEntityTypes = false)
         {
-            foreach (var entityList in entityCollections)
+            foreach (var entityList in entityCollections.Values)
             {
-                entityList?.Clear();
+                entityList.Clear();
             }
-            foreach (var baseEntityCollection in dataCollections)
+            foreach (var entityList in entityDataCollections.Values)
             {
-                baseEntityCollection?.Clear();
+                entityList.Clear();
+            }
+            foreach (var entityList in dataCollections.Values)
+            {
+                entityList.Clear();
+            }
+
+            if (clearEntityTypes)
+            {
+                entityCollections.Clear();
+                entityDataCollections.Clear();
+                dataCollections.Clear();
             }
         }
     }

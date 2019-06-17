@@ -14,6 +14,6 @@ namespace Automa.Entities
         IEntityCollection<T> Entities<T>() where T : class;
         IEntityDataCollection<T> EntityDatas<T>() where T : struct;
         IDataCollection<T> Datas<T>() where T : struct;
-        void Clear();
+        void Clear(bool clearEntityTypes = true);
     }
 }

@@ -41,7 +41,6 @@
     <Compile Include="..\Automa.Entities\Internal\DataCollection.cs" Link="Entities\Internal\DataCollection.cs" />
     <Compile Include="..\Automa.Entities\Internal\EntityCollection.cs" Link="Entities\Internal\EntityCollection.cs" />
     <Compile Include="..\Automa.Entities\Internal\EntityDataCollection.cs" Link="Entities\Internal\EntityDataCollection.cs" />
-    <Compile Include="..\Automa.Entities\Internal\EntityType.cs" Link="Entities\Internal\EntityType.cs" />
     <Compile Include="..\Automa.Tasks\ActionTask.cs" Link="Tasks\ActionTask.cs" />
     <Compile Include="..\Automa.Tasks\BlockingQueue.cs" Link="Tasks\BlockingQueue.cs" />
     <Compile Include="..\Automa.Tasks\BlockingQueueSlim.cs" Link="Tasks\BlockingQueueSlim.cs" />
